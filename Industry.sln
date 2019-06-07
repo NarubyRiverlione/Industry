@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndustryConsole", "IndustryConsole\IndustryConsole.csproj", "{81F181F1-8E22-4440-B79A-9A53FE670B4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndustryLib", "IndustryLib\IndustryLib.csproj", "{6DC6CC70-8D39-477C-B193-5422AFF48251}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndustryTest", "IndustryTest\IndustryTest.csproj", "{D6CD9609-C23D-4BCE-9B92-78971F0E97BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81F181F1-8E22-4440-B79A-9A53FE670B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F181F1-8E22-4440-B79A-9A53FE670B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F181F1-8E22-4440-B79A-9A53FE670B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F181F1-8E22-4440-B79A-9A53FE670B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DC6CC70-8D39-477C-B193-5422AFF48251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DC6CC70-8D39-477C-B193-5422AFF48251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DC6CC70-8D39-477C-B193-5422AFF48251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DC6CC70-8D39-477C-B193-5422AFF48251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6CD9609-C23D-4BCE-9B92-78971F0E97BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6CD9609-C23D-4BCE-9B92-78971F0E97BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6CD9609-C23D-4BCE-9B92-78971F0E97BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6CD9609-C23D-4BCE-9B92-78971F0E97BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

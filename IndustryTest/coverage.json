@@ -1,0 +1,220 @@
+{
+  "IndustryLib.dll": {
+    "/Users/renaatmeeuws/Projects/Industry/IndustryLib/Factory.cs": {
+      "IndustryLib.Factory": {
+        "System.Int32 IndustryLib.Factory::get_EquipmentCount()": {
+          "Lines": {
+            "8": 3
+          },
+          "Branches": []
+        },
+        "System.Collections.Generic.List`1<IndustryLib.IEquipment> IndustryLib.Factory::GetEquipment()": {
+          "Lines": {
+            "10": 1
+          },
+          "Branches": []
+        },
+        "System.Void IndustryLib.Factory::AddEquipment(IndustryLib.IEquipment)": {
+          "Lines": {
+            "12": 1
+          },
+          "Branches": []
+        },
+        "System.Void IndustryLib.Factory::.ctor()": {
+          "Lines": {
+            "6": 2
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/Users/renaatmeeuws/Projects/Industry/IndustryLib/Tank.cs": {
+      "IndustryLib.Tank": {
+        "System.String IndustryLib.Tank::get_Name()": {
+          "Lines": {
+            "5": 11
+          },
+          "Branches": []
+        },
+        "System.Boolean IndustryLib.Tank::get_Operational()": {
+          "Lines": {
+            "6": 11
+          },
+          "Branches": []
+        },
+        "System.String IndustryLib.Tank::get_TypeOfEquipment()": {
+          "Lines": {
+            "7": 11
+          },
+          "Branches": []
+        },
+        "System.Int32 IndustryLib.Tank::get_Volume()": {
+          "Lines": {
+            "9": 14
+          },
+          "Branches": []
+        },
+        "System.Int32 IndustryLib.Tank::get_Content()": {
+          "Lines": {
+            "10": 17
+          },
+          "Branches": []
+        },
+        "System.Int32 IndustryLib.Tank::get_Temperature()": {
+          "Lines": {
+            "11": 11
+          },
+          "Branches": []
+        },
+        "System.Boolean IndustryLib.Tank::get_HeatingOn()": {
+          "Lines": {
+            "13": 11
+          },
+          "Branches": []
+        },
+        "System.Boolean IndustryLib.Tank::get_FillingNow()": {
+          "Lines": {
+            "14": 11
+          },
+          "Branches": []
+        },
+        "System.String IndustryLib.Tank::ToString()": {
+          "Lines": {
+            "31": 0,
+            "32": 0,
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "38": 0,
+            "39": 0
+          },
+          "Branches": [
+            {
+              "Line": 32,
+              "Offset": 65,
+              "EndOffset": 67,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 32,
+              "Offset": 65,
+              "EndOffset": 74,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 93,
+              "EndOffset": 95,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 34,
+              "Offset": 93,
+              "EndOffset": 102,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 35,
+              "Offset": 178,
+              "EndOffset": 180,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 35,
+              "Offset": 178,
+              "EndOffset": 187,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 36,
+              "Offset": 205,
+              "EndOffset": 207,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 36,
+              "Offset": 205,
+              "EndOffset": 214,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Void IndustryLib.Tank::Fill(System.Int32)": {
+          "Lines": {
+            "42": 2,
+            "43": 3,
+            "44": 2,
+            "45": 2
+          },
+          "Branches": [
+            {
+              "Line": 43,
+              "Offset": 12,
+              "EndOffset": 14,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 43,
+              "Offset": 12,
+              "EndOffset": 22,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            }
+          ]
+        },
+        "System.Void IndustryLib.Tank::.ctor(System.String,System.Int32,System.Int32,System.Int32)": {
+          "Lines": {
+            "16": 14,
+            "17": 7,
+            "18": 7,
+            "19": 7,
+            "21": 7,
+            "23": 8,
+            "25": 7,
+            "26": 7,
+            "27": 7,
+            "28": 7,
+            "29": 7
+          },
+          "Branches": [
+            {
+              "Line": 23,
+              "Offset": 50,
+              "EndOffset": 52,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 23,
+              "Offset": 50,
+              "EndOffset": 55,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 7
+            }
+          ]
+        }
+      }
+    }
+  }
+}
