@@ -3,28 +3,33 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace IndustryLib {
-    public class Equipment : IEquipment {
+    public abstract class Equipment {
         public string Name { get; private set; }
-        public bool Operational { get;  set; } // TODO: lock down
-        public string TypeOfEquipment { get;  set; } // TODO: lock down
+        public bool Operational { get; private set; }
+        public string TypeOfEquipment { get; private set; }
         public int Volume { get; private set; }
         public int Content { get; private set; }
-        public List<IEquipment> Connections { get; set; }
+        public int Mark { get; private set; }
 
-        public Equipment(string name, int volume) {
+        public List<Equipment> Connections { get; set; }
+
+        public Equipment(string type, string name, int mark,
+         int volume, int content = 0) {
+            TypeOfEquipment = type;
             Name = name;
-            Operational = true;
             Volume = volume;
-            Content = 0;
-            Connections = new List<IEquipment>();
+            Mark = mark;
+            Operational = true;
+            Content = content <= Volume ? content : volume;
+            Connections = new List<Equipment>();
         }
 
-     public   virtual void SetFailed() {
+        public virtual void SetFailed() {
             Operational = false;
             Content = 0;
         }
 
-       public virtual void SetRepaired() {
+        public virtual void SetRepaired() {
             Operational = true;
         }
 
@@ -34,12 +39,12 @@ namespace IndustryLib {
         }
 
         public void BalanceConnections() {
-            foreach (IEquipment connection in Connections) {
+            foreach (Equipment connection in Connections) {
                 BalanceConnectionContent(connection);
             }
         }
 
-        private void BalanceConnectionContent(IEquipment connection) {
+        private void BalanceConnectionContent(Equipment connection) {
             if (connection != null) {
                 int difference = connection.Content - Content;
                 // more input then current content = balance difference

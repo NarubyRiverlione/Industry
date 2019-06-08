@@ -5,11 +5,11 @@ namespace IndustryConsole {
 
     partial class Program {
         static void UseEquipment() {
-            IEquipment equipment = SelectEquipment();
+            Equipment equipment = SelectEquipment();
         }
 
 
-        static IEquipment SelectEquipment() {
+        static Equipment SelectEquipment() {
             ShowFactory();
             Console.WriteLine();
 
@@ -23,7 +23,7 @@ namespace IndustryConsole {
             while (index > factory.EquipmentCount || index < 1);
             index--; // factory shows first equipment with number 1
 
-            IEquipment equipment = factory.GetEquipment()[index];
+            Equipment equipment = factory.GetEquipment()[index];
             return equipment;
 
         }

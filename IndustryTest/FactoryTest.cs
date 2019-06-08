@@ -22,7 +22,7 @@ namespace IndustryLib.Test {
             factory.AddEquipment(emptyTank);
             Assert.AreEqual(factory.EquipmentCount, 1);
 
-            IEquipment firstEquipment = factory.GetEquipment()[0];
+            Equipment firstEquipment = factory.GetEquipment()[0];
             Assert.AreEqual(firstEquipment, emptyTank);
         }
     }
