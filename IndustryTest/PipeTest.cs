@@ -63,38 +63,71 @@ namespace IndustryLib.Test {
         }
         [Test]
         public void Repair() {
-            Pipe pipeTest = new Pipe("testPipe test", 100);
+            Pipe pipeTest = new Pipe("testPipe test", 1);
             Assert.IsTrue(pipeTest.Operational);
             pipeTest.SetFailed();
             Assert.IsFalse(pipeTest.Operational);
             pipeTest.SetRepaired();
             Assert.IsTrue(pipeTest.Operational);
         }
+
         [Test]
-        public void AddFromInpunt() {
-            Pipe pipeOne = new Pipe("testPipe IN", 100);
-            Pipe pipeTest = new Pipe("testPipe test", 100);
-            pipeOne.Fill(70);
+        public void AddFromConnectedPipe() {
+            Pipe pipeOne = new Pipe("testPipe IN", 1, 70);
             Assert.AreEqual(pipeOne.Content, 70);
+
+            Pipe pipeTest = new Pipe("testPipe test", 1);
             pipeTest.Connections.Add(pipeOne);
+
             pipeTest.BalanceConnections();
             Assert.AreEqual(pipeOne.Content, 35);
             Assert.AreEqual(pipeTest.Content, 35);
         }
 
         [Test]
-        public void SendToInput() {
-            Pipe pipeOne = new Pipe("testPipe IN", 100);
-            Pipe pipeTest = new Pipe("testPipe test", 100);
-            pipeOne.Fill(10);
+        public void SendToConnectedPipe() {
+            Pipe pipeOne = new Pipe("testPipe IN", 1, 10);
             Assert.AreEqual(pipeOne.Content, 10);
-            pipeTest.Fill(80);
+
+            Pipe pipeTest = new Pipe("testPipe test", 1, 80);
             Assert.AreEqual(pipeTest.Content, 80);
             pipeTest.Connections.Add(pipeOne);
+
             pipeTest.BalanceConnections();
             Assert.AreEqual(pipeOne.Content, 45);
             Assert.AreEqual(pipeTest.Content, 45);
         }
+
+        [Test]
+        public void FromGreaterPipe() {
+            Pipe pipeOne = new Pipe("testPipe IN", 2, 150);
+            Assert.AreEqual(pipeOne.Content, 150);
+            Assert.AreEqual(pipeOne.Mark, 2);
+
+            Pipe pipeTest = new Pipe("testPipe test", 1);
+            Assert.AreEqual(pipeTest.Content, 0);
+            pipeTest.Connections.Add(pipeOne);
+
+            pipeTest.BalanceConnections();
+            Assert.AreEqual(pipeOne.Content, 75);
+            Assert.AreEqual(pipeTest.Content, 75);
+        }
+        [Test]
+        public void FromGreaterPipeDontOverFill() {
+            Pipe pipeOne = new Pipe("testPipe IN", 3, 300);
+            Assert.AreEqual(pipeOne.Content, 300);
+            Assert.AreEqual(pipeOne.Mark, 3);
+
+            Pipe pipeTest = new Pipe("testPipe test", 1);
+            Assert.AreEqual(pipeTest.Content, 0);
+            pipeTest.Connections.Add(pipeOne);
+
+            pipeTest.BalanceConnections();
+            Assert.AreEqual(pipeOne.Content, 200);
+            Assert.AreEqual(pipeTest.Content, 100);
+        }
+
     }
+
 }
 

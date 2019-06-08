@@ -47,10 +47,14 @@ namespace IndustryLib {
         private void BalanceConnectionContent(Equipment connection) {
             if (connection != null) {
                 int difference = connection.Content - Content;
-                // more input then current content = balance difference
+                //  input difference than current content = balance difference
                 if (difference != 0) {
-                    Fill(Content + difference / 2);// add diff 
-                    connection.Fill(connection.Content - difference / 2); // take out input
+                    int change = difference / EquipmentCst.BalanceFactor;
+                    // don't overfill
+                    if (change + Content > Volume) change = Volume;
+
+                    Fill(Content + change);// add diff 
+                    connection.Fill(connection.Content - change); // take out input
                 }
             }
         }
