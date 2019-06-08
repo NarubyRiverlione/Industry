@@ -51,7 +51,7 @@ namespace IndustryLib {
                 if (difference != 0) {
                     int change = difference / EquipmentCst.BalanceFactor;
                     // don't overfill
-                    if (change + Content > Volume) change = Volume;
+                    if (change + Content > Volume) change = Volume - Content;
 
                     Fill(Content + change);// add diff 
                     connection.Fill(connection.Content - change); // take out input
