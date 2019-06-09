@@ -76,7 +76,7 @@ namespace IndustryLib.Test {
             Assert.AreEqual(pipeOne.Content, 70);
 
             Pipe pipeTest = new Pipe("testPipe test", 1);
-            pipeTest.Connections.Add(pipeOne);
+            pipeTest.AddConnection(pipeOne);
 
             pipeTest.BalanceConnections();
             Assert.AreEqual(pipeOne.Content, 35);
@@ -90,7 +90,7 @@ namespace IndustryLib.Test {
 
             Pipe pipeTest = new Pipe("testPipe test", 1, 80);
             Assert.AreEqual(pipeTest.Content, 80);
-            pipeTest.Connections.Add(pipeOne);
+            pipeTest.AddConnection(pipeOne);
 
             pipeTest.BalanceConnections();
             Assert.AreEqual(pipeOne.Content, 45);
@@ -105,7 +105,7 @@ namespace IndustryLib.Test {
 
             Pipe pipeTest = new Pipe("testPipe test", 1);
             Assert.AreEqual(pipeTest.Content, 0);
-            pipeTest.Connections.Add(pipeOne);
+            pipeTest.AddConnection(pipeOne);
 
             pipeTest.BalanceConnections();
             Assert.AreEqual(pipeOne.Content, 75);
@@ -113,13 +113,13 @@ namespace IndustryLib.Test {
         }
         [Test]
         public void FromGreaterPipeDontOverFill() {
-            Pipe pipeOne = new Pipe("testPipe IN", 3, 300);
+            Pipe pipeOne = new Pipe("Greater pipe 300", 3, 300);
             Assert.AreEqual(pipeOne.Content, 300);
             Assert.AreEqual(pipeOne.Mark, 3);
 
-            Pipe pipeTest = new Pipe("testPipe test", 1);
+            Pipe pipeTest = new Pipe("normal pipe 100", 1);
             Assert.AreEqual(pipeTest.Content, 0);
-            pipeTest.Connections.Add(pipeOne);
+            pipeTest.AddConnection(pipeOne);
 
             pipeTest.BalanceConnections();
             Assert.AreEqual(pipeOne.Content, 200);
