@@ -39,10 +39,24 @@ namespace IndustryLib.Test {
             Assert.AreEqual(firstEquipment, testPipe);
         }
         [Test]
+        public void AddSource() {
+            Factory factory = new Factory();
+            Assert.AreEqual(factory.EquipmentCount, 0);
+
+            Source source = new Source("source test");
+            factory.AddEquipment(source);
+            Assert.AreEqual(factory.EquipmentCount, 1);
+
+            Equipment firstEquipment = factory.GetEquipment()[0];
+            Assert.AreEqual(firstEquipment, source);
+        }
+
+        [Test]
         public void GetEquipmentByName() {
             const string TankName = "testTank";
             const string PipeName = "First Pipe";
             const string Pipe2Name = "Other pipe";
+            const string SourceName = "Source Test";
 
             Factory factory = new Factory();
             Assert.AreEqual(factory.EquipmentCount, 0);
@@ -55,14 +69,21 @@ namespace IndustryLib.Test {
             Tank emptyTank = new Tank(TankName, 123);
             factory.AddEquipment(emptyTank);
 
+            Source source = new Source(SourceName);
+            factory.AddEquipment(source);
+
             Equipment foundTank = factory.GetEquipmentByName(TankName);
-            Assert.AreEqual(foundTank.TypeOfEquipment, EquipmentCst.TankType);
+            Assert.AreEqual(foundTank.TypeOfEquipment, EquipmentCst.Types.Tank);
             Assert.AreEqual(foundTank.Name, TankName);
 
             Equipment foundPipe = factory.GetEquipmentByName(PipeName);
-            Assert.AreEqual(foundPipe.TypeOfEquipment, EquipmentCst.PipeType);
+            Assert.AreEqual(foundPipe.TypeOfEquipment, EquipmentCst.Types.Pipe);
             Assert.AreEqual(foundPipe.Name, PipeName);
             Assert.AreEqual(foundPipe.Mark, 1);
+
+            Equipment foundSource = factory.GetEquipmentByName(SourceName);
+            Assert.AreEqual(foundSource.TypeOfEquipment, EquipmentCst.Types.Source);
+            Assert.AreEqual(foundSource.Name, SourceName);
         }
 
     }
@@ -74,9 +95,7 @@ namespace IndustryLib.Test {
         const string Pipe2Name = "Second Pipe";
         const string Pipe3Name = "Thirt Pipe";
 
-
-        [SetUp]
-        public void Pipes() {
+        private void PipesTestSetyp() {
             Pipe pipe1 = new Pipe(Pipe1Name, 1);
             Pipe pipe2 = new Pipe(Pipe2Name, 1);
             Pipe pipe3 = new Pipe(Pipe3Name, 1);
@@ -92,6 +111,7 @@ namespace IndustryLib.Test {
             factory.AddEquipment(pipe3);
         }
         private void TestPipeFlow() {
+
             Pipe startPipe = (Pipe)factory.GetEquipmentByName(Pipe1Name);
             Pipe middlePipe = (Pipe)factory.GetEquipmentByName(Pipe2Name);
             Pipe endPipe = (Pipe)factory.GetEquipmentByName(Pipe3Name);
@@ -118,6 +138,7 @@ namespace IndustryLib.Test {
         [Test]
         // pipe 1 is full, 2 & 3 empty
         public void PipeStartToEnd() {
+            PipesTestSetyp();
             // 100,0,0
             Pipe startPipe = (Pipe)factory.GetEquipmentByName(Pipe1Name);
             startPipe.Fill(startPipe.Volume);
@@ -145,11 +166,10 @@ namespace IndustryLib.Test {
             // pipe 2, balance -> 3 : 34,33,33
             TestPipeFlow();
         }
-
-
         // pipe 1  & 2 empty, 3 full
         [Test]
         public void PipeEndToStart() {
+            PipesTestSetyp();
             // 0,0,100
             Pipe startPipe = (Pipe)factory.GetEquipmentByName(Pipe1Name);
             Assert.AreEqual(startPipe.Content, 0);
@@ -182,10 +202,10 @@ namespace IndustryLib.Test {
             // pipe 2, balance -> 3 : 33,33,34
             TestPipeFlow();
         }
-
         // pipe 1  & 3 empty, 2 full
         [Test]
         public void PipeMiddle() {
+            PipesTestSetyp();
             // 0,0,100
             Pipe startPipe = (Pipe)factory.GetEquipmentByName(Pipe1Name);
             Assert.AreEqual(startPipe.Content, 0);
@@ -214,10 +234,10 @@ namespace IndustryLib.Test {
             // pipe 2, balance -> 3 : 34,33,33
             TestPipeFlow();
         }
-
         // pipe 1 : 25, pipe 2 = 10, pipe 3 = 75
         [Test]
         public void PipeBalanceAll() {
+            PipesTestSetyp();
             Pipe startPipe = (Pipe)factory.GetEquipmentByName(Pipe1Name);
             startPipe.Fill(25);
             Assert.AreEqual(startPipe.Content, 25);
@@ -284,11 +304,9 @@ namespace IndustryLib.Test {
             Assert.AreEqual(count, 11);
 
         }
-
-
+        // factory with  pipe 1 : 100 - pipe 2 : 100, tank : empty
         [Test]
-
-        public void PipesToFillTank() {       // factory with  pipe 1 : 100 - pipe 2 : 100, tank : empty
+        public void PipesToFillTank() {
             const int tankStartContent = 0;
             Tank tank = new Tank("test tank", 1000, tankStartContent);
 
@@ -324,6 +342,60 @@ namespace IndustryLib.Test {
             Assert.AreEqual(pipeStart.Content, 68);
             Assert.AreEqual(count, 2);
 
+        }
+
+        // unlimite source direct connected to tank = instant filled
+        [Test]
+        public void SourceToFillTank() {
+            Source source = new Source("test source");
+            Tank tank = new Tank("test tank", 1000);
+            source.Connections.Add(tank);
+            tank.Connections.Add(source);
+
+            Factory fac = new Factory();
+            fac.AddEquipment(source);
+            fac.AddEquipment(tank);
+
+            Assert.AreEqual(tank.Content, 0);
+
+            fac.BalanceContents();
+            Assert.AreEqual(tank.Content, tank.Volume);
+        }
+
+        // unlimite source  connected via 1 pipe to tank 
+        [Test]
+        public void SourceToPipeTOFillTank() {
+            Source source = new Source("test source");
+            Pipe pipe = new Pipe("test pipe", 5); // 500
+            Tank tank = new Tank("test tank", 1000);
+            source.Connections.Add(pipe);
+            pipe.Connections.Add(source);
+            pipe.Connections.Add(tank);
+            tank.Connections.Add(pipe);
+
+            Factory fac = new Factory();
+            fac.AddEquipment(source);
+            fac.AddEquipment(tank);
+            fac.AddEquipment(pipe);
+
+            Assert.AreEqual(tank.Content, 0);
+            Assert.AreEqual(pipe.Content, 0);
+
+            // P500,T0
+            // P250,T250
+            fac.BalanceContents();
+            Assert.AreEqual(pipe.Content, pipe.Volume / EquipmentCst.BalanceFactor);
+            Assert.AreEqual(tank.Content, pipe.Volume / EquipmentCst.BalanceFactor);
+
+
+            int count = 0;
+            do {
+                fac.BalanceContents();
+                count++;
+            } while (tank.Content < tank.Volume - 1);
+
+            Assert.AreEqual(pipe.Content, pipe.Volume);
+            Assert.AreEqual(count, 2);
         }
     }
 }

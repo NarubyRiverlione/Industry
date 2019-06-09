@@ -10,7 +10,7 @@ namespace IndustryLib {
 
 
         public Tank(string name, int volume, int content = 0, int temp = 20)
-        : base(EquipmentCst.TankType, name, 1, volume, content) {
+        : base(EquipmentCst.Types.Tank, name, 1, volume, content) {
             Temperature = temp;
             HeatingOn = false;
             FillingNow = false;

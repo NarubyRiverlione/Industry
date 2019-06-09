@@ -14,7 +14,7 @@ namespace IndustryLib.Test {
             Assert.AreEqual(testPipe.Mark, Mark);
             Assert.AreEqual(testPipe.Volume, EquipmentCst.PipeBasicVolume);
             Assert.AreEqual(testPipe.Content, 0);
-            Assert.AreEqual(testPipe.TypeOfEquipment, EquipmentCst.PipeType);
+            Assert.AreEqual(testPipe.TypeOfEquipment, EquipmentCst.Types.Pipe);
         }
         [Test]
         public void CreateMark_4() {
@@ -23,7 +23,7 @@ namespace IndustryLib.Test {
             Assert.AreEqual(testPipe.Mark, 4);
             Assert.AreEqual(testPipe.Volume, 4 * EquipmentCst.PipeBasicVolume);
             Assert.AreEqual(testPipe.Content, 0);
-            Assert.AreEqual(testPipe.TypeOfEquipment, EquipmentCst.PipeType);
+            Assert.AreEqual(testPipe.TypeOfEquipment, EquipmentCst.Types.Pipe);
         }
 
         [Test]
@@ -32,7 +32,6 @@ namespace IndustryLib.Test {
             Assert.AreEqual(testPipe.Name, Name);
             Assert.AreEqual(testPipe.Mark, Mark);
             Assert.AreEqual(testPipe.Content, EquipmentCst.PipeBasicVolume / 2);
-            Assert.AreEqual(testPipe.TypeOfEquipment, EquipmentCst.PipeType);
         }
 
         [Test]

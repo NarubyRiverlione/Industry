@@ -6,14 +6,14 @@ namespace IndustryLib {
     public abstract class Equipment {
         public string Name { get; private set; }
         public bool Operational { get; private set; }
-        public string TypeOfEquipment { get; private set; }
+        public EquipmentCst.Types TypeOfEquipment { get; private set; }
         public int Volume { get; private set; }
         public int Content { get; private set; }
         public int Mark { get; private set; }
 
         public List<Equipment> Connections { get; set; }
 
-        public Equipment(string type, string name, int mark,
+        protected Equipment(EquipmentCst.Types type, string name, int mark,
          int volume, int content = 0) {
             TypeOfEquipment = type;
             Name = name;
@@ -53,8 +53,13 @@ namespace IndustryLib {
                     // don't overfill
                     if (change + Content > Volume) change = Volume - Content;
 
-                    Fill(Content + change);// add diff 
-                    connection.Fill(connection.Content - change); // take out input
+                    if (TypeOfEquipment != EquipmentCst.Types.Source)
+                        Fill(Content + change);// add diff 
+
+                    // take out input, unless it's a unlimited Source
+                    if (connection.TypeOfEquipment != EquipmentCst.Types.Source) {
+                        connection.Fill(connection.Content - change);
+                    }
                 }
             }
         }
