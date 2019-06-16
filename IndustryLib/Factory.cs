@@ -24,7 +24,6 @@ namespace IndustryLib {
             }
         }
 
-
         private void ResetPressures() {
             AllEquipment.ForEach(eq =>  eq.Pressure = 0);
         }

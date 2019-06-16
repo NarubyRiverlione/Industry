@@ -1,6 +1,6 @@
 ﻿using System;using System.Collections.Generic;using System.Linq;
 using System.Text;namespace IndustryLib {    public abstract class Equipment {        public string Name { get; private set; }        public bool Operational { get; private set; }        public EquipmentCst.Types TypeOfEquipment { get; private set; }        public int Volume { get; private set; }        public int Content { get; private set; }        public int Mark { get; private set; }
-        protected internal double Pressure { get; set; }        private List<Equipment> Connections { get; set; }        protected Equipment(EquipmentCst.Types type, string name, int mark,         int volume, int content = 0) {            TypeOfEquipment = type;            Name = name;            Volume = volume;            Mark = mark;            Operational = true;            Content = content <= Volume ? content : volume;
+        public  double Pressure { get; protected internal set; }        private List<Equipment> Connections { get; set; }        protected Equipment(EquipmentCst.Types type, string name, int mark,         int volume, int content = 0) {            TypeOfEquipment = type;            Name = name;            Volume = volume;            Mark = mark;            Operational = true;            Content = content <= Volume ? content : volume;
             //     Pressure = content == 0 ? 0 : content / EquipmentCst.PressureContentFactor;
             Connections = new List<Equipment>();        }
 
@@ -36,7 +36,7 @@ using System.Text;namespace IndustryLib {    public abstract class Equipment 
                 int change = difference / EquipmentCst.BalanceFactor;
              
                 // connection has greater pressure,never send to,
-                // always pull all contentfrom
+                // always pull all content from
                 if (connection.Pressure > Pressure)       
                     change = - Math.Abs(connection.Content);
 

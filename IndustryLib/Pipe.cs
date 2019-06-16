@@ -12,9 +12,11 @@ namespace IndustryLib {
         }
 
         public override void CalcPressure(Equipment connectedTo) {
-            if (connectedTo == null) Pressure = 0;
-            // connectTo has greater pressure, that it into the Pipe
-            Pressure = connectedTo.Pressure > Pressure ? connectedTo.Pressure : Pressure;         
+            if (connectedTo == null)
+                Pressure = 0;
+            else
+                // connectTo has greater pressure, that it into the Pipe
+                Pressure = connectedTo.Pressure > Pressure ? connectedTo.Pressure : Pressure;
         }
     }
 }

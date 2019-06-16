@@ -21,7 +21,20 @@ using NUnit.Framework;namespace IndustryLib.Test {    [TestFixture]    publi
             correct += " and is filling up";
             Assert.AreEqual(output, correct);
         }
+        [Test]
+        public void ToStringNotOperational() {            const int Content = 99;            const int Temp = 656;            const bool Operational = false;
+            Tank tank = new Tank(Name, Volume) {
+                HeatingOn = true,
+                FillingNow = true,
+                Temperature = Temp
+            };
+            tank.Fill(Content);
+            tank.SetFailed();
 
+            string output = tank.ToString();            string correct = "Tank " + Name + " has volume of " + Volume.ToString() + " liter and is " + (Operational ? "operational" : "not operational");            
+            correct += " and is empty";
+            Assert.AreEqual(output, correct);
+        }
         [Test]
         public void ToStringEmpty() {
             Tank tank = new Tank(Name, Volume);
