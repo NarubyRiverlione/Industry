@@ -14,13 +14,7 @@ namespace IndustryLib {
         public override void CalcPressure(Equipment connectedTo) {
             if (connectedTo == null) Pressure = 0;
             // connectTo has greater pressure, that it into the Pipe
-            Pressure = connectedTo.Pressure > Pressure ? connectedTo.Pressure : Pressure;
-
-            // // greatest pressure of connections >  own pressure = set greatest to own
-            // double greatestPressConnections = Connections
-            ////     .Where(con=>con.TypeOfEquipment != EquipmentCst.Types.Pipe)
-            //     .Max(con => con.Pressure);
-            // Pressure = greatestPressConnections > Pressure ? greatestPressConnections : Pressure;
+            Pressure = connectedTo.Pressure > Pressure ? connectedTo.Pressure : Pressure;         
         }
     }
 }

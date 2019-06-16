@@ -37,9 +37,11 @@ using System.Text;namespace IndustryLib {    public abstract class Equipment 
              
                 // connection has greater pressure,never send to,
                 // always pull all contentfrom
-                if (connection.Pressure > Pressure) {         
-                    change = -connection.Content;
-                }
+                if (connection.Pressure > Pressure)       
+                    change = - Math.Abs(connection.Content);
+
+                if (connection.Pressure < Pressure)
+                    change = Math.Abs(Content);
 
                 //// tank takes everything out connection
                 //if (connection.TypeOfEquipment == EquipmentCst.Types.Tank)
