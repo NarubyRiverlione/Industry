@@ -3,15 +3,13 @@
 namespace IndustryLib.Test {
     [TestFixture]
     public class PipeTest {
-
-        const string Name = "test pipe";
-        const int Mark = 1;
+        const string Name = "test pipe";  
 
         [Test]
         public void CreateMark_1() {
-            Pipe testPipe = new Pipe(Name, Mark);
+            Pipe testPipe = new Pipe(Name);
             Assert.AreEqual(testPipe.Name, Name);
-            Assert.AreEqual(testPipe.Mark, Mark);
+            Assert.AreEqual(testPipe.Mark,1);
             Assert.AreEqual(testPipe.Volume, EquipmentCst.PipeBasicVolume);
             Assert.AreEqual(testPipe.Content, 0);
             Assert.AreEqual(testPipe.TypeOfEquipment, EquipmentCst.Types.Pipe);
@@ -28,22 +26,22 @@ namespace IndustryLib.Test {
 
         [Test]
         public void CreateWithContent() {
-            Pipe testPipe = new Pipe(Name, Mark, EquipmentCst.PipeBasicVolume / 2);
+            Pipe testPipe = new Pipe(Name,1, EquipmentCst.PipeBasicVolume / 2);
             Assert.AreEqual(testPipe.Name, Name);
-            Assert.AreEqual(testPipe.Mark, Mark);
+            Assert.AreEqual(testPipe.Mark,1);
             Assert.AreEqual(testPipe.Content, EquipmentCst.PipeBasicVolume / 2);
         }
 
         [Test]
         public void SetContent() {
-            Pipe testPipe = new Pipe(Name, Mark);
+            Pipe testPipe = new Pipe(Name);
             Assert.AreEqual(testPipe.Content, 0);
             testPipe.Fill(10);
             Assert.AreEqual(testPipe.Content, 10);
         }
         [Test]
         public void SetContentDontOverfill() {
-            Pipe testPipe = new Pipe(Name, Mark);
+            Pipe testPipe = new Pipe(Name);
             Assert.AreEqual(testPipe.Content, 0);
             testPipe.Fill(testPipe.Volume * 5);
             Assert.AreEqual(testPipe.Content, testPipe.Volume);
@@ -52,7 +50,7 @@ namespace IndustryLib.Test {
 
         [Test]
         public void Failure() {
-            Pipe pipeTest = new Pipe(Name, Mark);
+            Pipe pipeTest = new Pipe(Name);
             pipeTest.Fill(99);
             Assert.IsTrue(pipeTest.Operational);
             Assert.AreEqual(pipeTest.Content, 99);
@@ -100,30 +98,30 @@ namespace IndustryLib.Test {
         [Test]
         public void FromGreaterPipe() {
             Pipe pipeOne = new Pipe("testPipe IN", 2, 150);
-            Assert.AreEqual(pipeOne.Content, 150);
-            Assert.AreEqual(pipeOne.Mark, 2);
+            Assert.AreEqual(150,pipeOne.Content);
+            Assert.AreEqual(2,pipeOne.Mark);
 
             Pipe pipeTest = new Pipe("testPipe test", 1);
-            Assert.AreEqual(pipeTest.Content, 0);
+            Assert.AreEqual(0,pipeTest.Content);
             pipeTest.AddConnection(pipeOne);
 
             pipeTest.BalanceConnections();
-            Assert.AreEqual(pipeOne.Content, 75);
-            Assert.AreEqual(pipeTest.Content, 75);
+            Assert.AreEqual(75,pipeOne.Content);
+            Assert.AreEqual(75,pipeTest.Content);
         }
         [Test]
         public void FromGreaterPipeDontOverFill() {
             Pipe pipeOne = new Pipe("Greater pipe 300", 3, 300);
-            Assert.AreEqual(pipeOne.Content, 300);
+            Assert.AreEqual(300,pipeOne.Content);
             Assert.AreEqual(pipeOne.Mark, 3);
 
             Pipe pipeTest = new Pipe("normal pipe 100", 1);
-            Assert.AreEqual(pipeTest.Content, 0);
+            Assert.AreEqual(0,pipeTest.Content);
             pipeTest.AddConnection(pipeOne);
 
             pipeTest.BalanceConnections();
-            Assert.AreEqual(pipeOne.Content, 200);
-            Assert.AreEqual(pipeTest.Content, 100);
+            Assert.AreEqual(200,pipeOne.Content);
+            Assert.AreEqual(100,pipeTest.Content);
         }
 
     }

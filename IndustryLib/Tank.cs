@@ -32,5 +32,11 @@ namespace IndustryLib {
 
             return output;
         }
+
+        public override void CalcPressure(Equipment connectedTo=null) {
+            // Pressure = content / factor        
+                Pressure = (double)Content / EquipmentCst.PressureContentFactor;            
+            }
+        }
     }
-}
+

@@ -18,9 +18,16 @@ namespace IndustryLib {
         }
 
         public void BalanceContents() {
+            ResetPressures();
             foreach (Equipment eq in AllEquipment) {
                 eq.BalanceConnections();
             }
         }
+
+
+        private void ResetPressures() {
+            AllEquipment.ForEach(eq =>  eq.Pressure = 0);
+        }
+        
     }
 }
