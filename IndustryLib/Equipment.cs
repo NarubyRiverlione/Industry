@@ -1,5 +1,4 @@
-﻿using System;using System.Collections.Generic;using System.Linq;
-using System.Text;namespace IndustryLib {    public abstract class Equipment {        public string Name { get; private set; }        public bool Operational { get; private set; }        public EquipmentCst.Types TypeOfEquipment { get; private set; }        public int Volume { get; private set; }        public int Content { get; private set; }        public int Mark { get; private set; }
+﻿using System;using System.Collections.Generic;namespace IndustryLib {    public abstract class Equipment {        public string Name { get; private set; }        public bool Operational { get; private set; }        public EquipmentCst.Types TypeOfEquipment { get; private set; }        public int Volume { get; protected internal set; }        public int Content { get; private set; }        public int Mark { get; private set; }
         public  double Pressure { get; protected internal set; }        private List<Equipment> Connections { get; set; }        protected Equipment(EquipmentCst.Types type, string name, int mark,         int volume, int content = 0) {            TypeOfEquipment = type;            Name = name;            Volume = volume;            Mark = mark;            Operational = true;            Content = content <= Volume ? content : volume;
             //     Pressure = content == 0 ? 0 : content / EquipmentCst.PressureContentFactor;
             Connections = new List<Equipment>();        }
@@ -43,12 +42,7 @@ using System.Text;namespace IndustryLib {    public abstract class Equipment 
                 if (connection.Pressure < Pressure)
                     change = Math.Abs(Content);
 
-                //// tank takes everything out connection
-                //if (connection.TypeOfEquipment == EquipmentCst.Types.Tank)
-                //    change = Content;
-
-
-                // don't overfill connected
+                      // don't overfill connected
                 if (connection.Content + change > connection.Volume)
                     change = Math.Sign(change) * (connection.Volume - connection.Content) ;
                 // don't overfill self
@@ -58,11 +52,9 @@ using System.Text;namespace IndustryLib {    public abstract class Equipment 
                 // change connected       
                 connection.Fill(connection.Content + change );
 
-                // change own content          
-                // sign if difference determines fill of pull
+                // change own content     
                 Fill(Content - change );
-
-                //}
+         
             }
         }
     }

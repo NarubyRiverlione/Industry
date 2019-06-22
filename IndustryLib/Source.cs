@@ -1,4 +1,4 @@
-using System;
+
 namespace IndustryLib {
     public class Source : Equipment {
 
